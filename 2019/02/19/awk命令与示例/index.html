@@ -1,0 +1,720 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>awk命令与示例 | welcome</title>
+    <meta name="author" content="zhaoxiyu">
+    
+    <meta name="description" content="thefirst blog">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="awk命令与示例">
+    <meta property="og:site_name" content="zhaoxiblog">
+
+    
+    <meta property="og:image" content>
+    
+
+    <link rel="icon" type="image/png" href="/yukk001.github.io/favicon.png">
+    <link rel="alternate" href="/yukk001.github.io/atom.xml" title="zhaoxiblog" type="application/atom+xml">
+    <link rel="stylesheet" href="/yukk001.github.io/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/yukk001.github.io/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/yukk001.github.io/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/yukk001.github.io/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+</html>
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="blue">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class>
+            <a href="/" class="brand-logo hide-on-med-and-down">zhaoxiblog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/">
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives">
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu">
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading">
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about">
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search">
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav blue darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">你的大名</p>
+                        <p class="desc">Web前端/iOS/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/">
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives">
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu">
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading">
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about">
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search">
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav blue darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper blue">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>awk命令与示例</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2019-02-19T14:21:37.000Z"><a href="/yukk001.github.io/2019/02/19/awk命令与示例/">2019-02-19</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/yukk001.github.io/tags/awk与sed/" class="chip pink lighten-1">awk与sed</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>awk是一个强大的文本分析工具，相对于grep的查找，sed的编辑，awk在其对数据分析并生成报告时，显得尤为强大。简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。</p>
+<p>awk有3个不同版本: awk、nawk和gawk，未作特别说明，一般指gawk，gawk 是 AWK 的 GNU 版本。</p>
+<p>awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母。实际上 AWK 的确拥有自己的语言： AWK 程序设计语言 ， 三位创建者已将它正式定义为“样式扫描和处理语言”。它允许您创建简短的程序，这些程序读取输入文件、为数据排序、处理数据、对输入执行计算以及生成报表，还有无数其他的功能。</p>
+<p><strong>使用方法</strong></p>
+<p>awk’{pattern + action}’{filenames}</p>
+<p>尽管操作可能会很复杂，但语法总是这样，其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。花括号（{}）不需要在程序中始终出现，但它们用于根据特定的模式对一系列指令进行分组。 pattern就是要表示的正则表达式，用斜杠括起来。</p>
+<p>awk语言的最基本功能是在文件或者字符串中基于指定规则浏览和抽取信息，awk抽取信息后，才能进行其他文本操作。完整的awk脚本通常用来格式化文本文件中的信息。</p>
+<p>通常，awk是以文件的一行为处理单位的。awk每接收文件的一行，然后执行相应的命令，来处理文本。</p>
+<p><strong>调用awk</strong></p>
+<p>有三种方式调用awk</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-99abab64e6694e12.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>1.命令行方式awk[-F  field-separator]’commands’input-file(s)</p>
+<p>其中，commands 是真正awk命令，[-F域分隔符]是可选的。 input-file(s) 是待处理的文件。</p>
+<p>在awk中，文件的每一行中，由域分隔符分开的每一项称为一个域。通常，在不指名-F域分隔符的情况下，默认的域分隔符是空格。2.shell脚本方式</p>
+<p>将所有的awk命令插入一个文件，并使awk程序可执行，然后awk命令解释器作为脚本的首行，一遍通过键入脚本名称来调用。</p>
+<p>相当于shell脚本首行的：#!/bin/sh可以换成：#!/bin/awk3.将所有的awk命令插入一个单独文件，然后调用：awk-fawk-script-fileinput-file(s)</p>
+<p>其中，-f选项加载awk-script-file中的awk脚本，input-file(s)跟上面的是一样的。</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-86d4fab320d184c5.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>本章重点介绍命令行方式。</p>
+<p><strong>入门实例</strong></p>
+<p>假设last -n 5的输出如下</p>
+<p>[root@www ~]#last-n5&lt;==仅取出前五行</p>
+<p>root    pts/1192.168.1.100Tue Feb1011:21still loggedinroot    pts/1192.168.1.100Tue Feb1000:46-02:28(01:41)</p>
+<p>root    pts/1192.168.1.100Mon Feb911:41-18:30(06:48)</p>
+<p>dmtsai  pts/1192.168.1.100Mon Feb911:41-11:41(00:00)</p>
+<p>root    tty1                  Fri Sep514:09-14:10(00:01)</p>
+<p>如果只是显示最近登录的5个帐号</p>
+<p>#last-n5|awk’{print $1}’</p>
+<p>root</p>
+<p>root</p>
+<p>root</p>
+<p>dmtsai</p>
+<p>root</p>
+<p>awk工作流程是这样的：读入有’\n’换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域。默认域分隔符是”空白键” 或 “[tab]键”,所以$1表示登录用户，$3表示登录用户ip,以此类推。</p>
+<p>如果只是显示/etc/passwd的账户</p>
+<p>#cat/etc/passwd|awk-F’:’’{print $1}’root</p>
+<p>daemon</p>
+<p>bin</p>
+<p>sys</p>
+<p>这种是awk+action的示例，每行都会执行action{print $1}。</p>
+<p>-F指定域分隔符为’:’。</p>
+<p>如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以tab键分割</p>
+<p>#cat/etc/passwd|awk-F’:’’{print $1”\t”$7}’root/bin/bash</p>
+<p>daemon/bin/shbin/bin/shsys/bin/sh</p>
+<p>如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加”blue,/bin/nosh”。</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-a6605dc27837aeef.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>cat/etc/passwd|awk-F’:’’BEGIN {print “name,shell”}  {print $1”,”$7} END {print “blue,/bin/nosh”}’name,shell</p>
+<p>root,/bin/bash</p>
+<p>daemon,/bin/shbin,/bin/shsys,/bin/sh….</p>
+<p>blue,/bin/nosh</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-c9baa4bb3fd0d045.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>awk工作流程是这样的：先执行BEGING，然后读取文件，读入有/n换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域,随后开始执行模式所对应的动作action。接着开始读入第二条记录······直到所有的记录都读完，最后执行END操作。</p>
+<p>搜索/etc/passwd有root关键字的所有行</p>
+<p>#awk-F:’/root/‘/etc/passwdroot:x:0:0:root:/root:/bin/bash</p>
+<p>这种是pattern的使用示例，匹配了pattern(这里是root)的行才会执行action(没有指定action，默认输出每行的内容)。</p>
+<p>搜索支持正则，例如找root开头的: awk -F: ‘/^root/‘ /etc/passwd</p>
+<p>搜索/etc/passwd有root关键字的所有行，并显示对应的shell</p>
+<p>#awk-F:’/root/{print $7}’/etc/passwd/bin/bash</p>
+<p>这里指定了action{print $7}</p>
+<p><strong>awk内置变量</strong></p>
+<p>awk有许多内置变量用来设置环境信息，这些变量可以被改变，下面给出了最常用的一些变量。</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-004d94b9e17c135f.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>ARGC              命令行参数个数</p>
+<p>ARGV              命令行参数排列</p>
+<p>ENVIRON            支持队列中系统环境变量的使用</p>
+<p>FILENAME          awk浏览的文件名</p>
+<p>FNR                浏览文件的记录数</p>
+<p>FS                设置输入域分隔符，等价于命令行-F选项</p>
+<p>NF                浏览记录的域的个数</p>
+<p>NR                已读的记录数</p>
+<p>OFS                输出域分隔符</p>
+<p>ORS                输出记录分隔符</p>
+<p>RS                控制记录分隔符</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-b2c282078397e293.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>此外,$0变量是指整条记录。$1表示当前行的第一个域,$2表示当前行的第二个域,……以此类推。</p>
+<p>统计/etc/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:</p>
+<p>#awk-F’:’’{print “filename:” FILENAME “,linenumber:” NR “,columns:” NF “,linecontent:”$0}’/etc/passwdfilename:/etc/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root:/bin/bash</p>
+<p>filename:/etc/passwd,linenumber:2,columns:7,linecontent:daemon:x:1:1:daemon:/usr/sbin:/bin/shfilename:/etc/passwd,linenumber:3,columns:7,linecontent:bin:x:2:2:bin:/bin:/bin/shfilename:/etc/passwd,linenumber:4,columns:7,linecontent:sys:x:3:3:sys:/dev:/bin/sh</p>
+<p>使用printf替代print,可以让代码更加简洁，易读</p>
+<p>awk-F’:’’{printf(“filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n”,FILENAME,NR,NF,$0)}’/etc/passwd</p>
+<p><strong>print和printf</strong></p>
+<p>awk中同时提供了print和printf两种打印输出的函数。</p>
+<p>其中print函数的参数可以是变量、数值或者字符串。字符串必须用双引号引用，参数用逗号分隔。如果没有逗号，参数就串联在一起而无法区分。这里，逗号的作用与输出文件的分隔符的作用是一样的，只是后者是空格而已。</p>
+<p>printf函数，其用法和c语言中printf基本相似,可以格式化字符串,输出复杂时，printf更加好用，代码更易懂。</p>
+<p><strong>awk编程</strong></p>
+<p><strong>变量和赋值</strong></p>
+<p>除了awk的内置变量，awk还可以自定义变量。</p>
+<p>下面统计/etc/passwd的账户人数</p>
+<p>awk’{count++;print $0;} END{print “user count is “, count}’/etc/passwdroot:x:0:0:root:/root:/bin/bash……user count is  40</p>
+<p>count是自定义变量。之前的action{}里都是只有一个print,其实print只是一个语句，而action{}可以有多个语句，以;号隔开。</p>
+<p>这里没有初始化count，虽然默认是0，但是妥当的做法还是初始化为0:</p>
+<p>awk’BEGIN {count=0;print “[start]user count is “, count} {count=count+1;print $0;} END{print “[end]user count is “, count}’/etc/passwd[start]user count is0root:x:0:0:root:/root:/bin/bash</p>
+<p>…</p>
+<p>[end]user count is40</p>
+<p>统计某个文件夹下的文件占用的字节数</p>
+<p>ls-l |awk’BEGIN {size=0;} {size=size+$5;} END{print “[end]size is “, size}’</p>
+<p>[end]size is  8657198</p>
+<p>如果以M为单位显示:</p>
+<p>ls-l |awk’BEGIN {size=0;} {size=size+$5;} END{print “[end]size is “, size/1024/1024,”M”}’</p>
+<p>[end]size is  8.25889 M</p>
+<p>注意，统计不包括文件夹的子目录。</p>
+<p><strong>条件语句</strong></p>
+<p>awk中的条件语句是从C语言中借鉴来的，见如下声明方式：</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-8606d5dd8f532280.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>if(expression) {</p>
+<p>statement;</p>
+<p>statement;</p>
+<p>… …</p>
+<p>}if(expression) {</p>
+<p>statement;</p>
+<p>}else{</p>
+<p>statement2;</p>
+<p>}if(expression) {</p>
+<p>statement1;</p>
+<p>}elseif(expression1) {</p>
+<p>statement2;</p>
+<p>}else{</p>
+<p>statement3;</p>
+<p>}</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-fb2c6159a055df78.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>统计某个文件夹下的文件占用的字节数,过滤4096大小的文件(一般都是文件夹):</p>
+<p>ls-l |awk’BEGIN {size=0;print “[start]size is “, size} {if($5!=4096){size=size+$5;}} END{print “[end]size is “, size/1024/1024,”M”}’</p>
+<p>[end]size is  8.22339 M</p>
+<p><strong>循环语句</strong></p>
+<p>awk中的循环语句同样借鉴于C语言，支持while、do/while、for、break、continue，这些关键字的语义和C语言中的语义完全相同。</p>
+<p><strong>数组</strong></p>
+<p>因为awk中数组的下标可以是数字和字母，数组的下标通常被称为关键字(key)。值和关键字都存储在内部的一张针对key/value应用hash的表格里。由于hash不是顺序存储，因此在显示数组内容时会发现，它们并不是按照你预料的顺序显示出来的。数组和变量一样，都是在使用时自动创建的，awk也同样会自动判断其存储的是数字还是字符串。一般而言，awk中的数组用来从记录中收集信息，可以用于计算总和、统计单词以及跟踪模板被匹配的次数等等。</p>
+<p>显示/etc/passwd的账户</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-e3840d41ba2b8bfa.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>awk-F’:’’BEGIN {count=0;} {name[count] = $1;count++;}; END{for (i = 0; i &lt; NR; i++) print i, name[i]}’/etc/passwd0root1daemon2bin3sys4sync5games</p>
+<p>……</p>
+<p><a href="https://link.jianshu.com?t=javascript:void(0" target="_blank" rel="noopener"></a>;)</p>
+<p><img src="//upload-images.jianshu.io/upload_images/2310355-19e282cbe8f12ac7.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/20/format/webp" alt="image"></p>
+<p>这里使用for循环遍历数组</p>
+<p>awk编程的内容极多，这里只罗列简单常用的用法，更多请参考<a href="https://link.jianshu.com?t=http://www.gnu.org/software/gawk/manual/gawk.html" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html</a></p>
+
+                
+<p class="pink-link-context">
+    <a href="/yukk001.github.io/2019/02/19/K最近邻算法/" rel="next" title="K最近邻算法">
+    上一篇：K最近邻算法
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/yukk001.github.io/2019/02/19/sed-命令与使用方式/" rel="next" title="sed-命令与使用方式">
+    下一篇：sed-命令与使用方式
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1" data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer blue darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/yukk001.github.io/js/jquery.min.js"></script>
+<script src="/yukk001.github.io/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/yukk001.github.io/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/yukk001.github.io/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
