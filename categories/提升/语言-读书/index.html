@@ -7,7 +7,7 @@
 
     
 
-    <title>算法图解阅读笔记-选择排序 | 于照熙</title>
+    <title>语言,读书 | 于照熙</title>
     <meta name="author" content="zhaoxiyu">
     
     <meta name="description" content="照熙的自留地">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="算法图解阅读笔记-选择排序">
+    
     <meta property="og:site_name" content="zhaoxiblog">
 
     
@@ -233,94 +233,30 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper blue">
         <span class="breadcrumb">当前位置（分类目录）</span>
         
-            
-    
-    
-    <a class="breadcrumb" href="/yukk001.github.io/categories/提升/">提升</a><a class="breadcrumb" href="/yukk001.github.io/categories/提升/读书/">读书</a>
-
 
         
-
+            <a class="breadcrumb" href="/categories/提升/语言-读书/">语言,读书</a>
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>算法图解阅读笔记-选择排序</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2019-02-19T14:21:37.000Z"><a href="/yukk001.github.io/2019/02/19/算法图解阅读笔记-选择排序/">2019-02-19</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <div class="collection mt-0">
         
-            <a href="/yukk001.github.io/tags/算法图解/" class="chip pink lighten-1">算法图解</a>
+            <a href="/yukk001.github.io/2019/02/19/第七章-接口/" class="collection-item grey-text text-darken-1">
+                <time datetime="2019-02-19T14:21:37.000Z">2019-02-19</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                第七章-接口
+            </a>
         
     </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#数组与链表"><span class="section table-of-contents-text">数组与链表</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#选择排序"><span class="section table-of-contents-text">选择排序</span></a></li></ol><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#golang版本"><span class="section table-of-contents-text">golang版本</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#php版本"><span class="section table-of-contents-text">php版本</span></a>
-</li></div>
-
-
-            <div class="entry pink-link-context">
-                <h3 id="数组与链表"><a href="#数组与链表" class="headerlink" title="数组与链表"></a>数组与链表</h3><ul>
-<li>数组是连续内存的应用方式，它的特点就是所有的单元的内存地址都是连续的，当需要扩展而初始化的内存不足够的时候，就需要重新申请内存。</li>
-<li>链表是已上一个元素指向来完成存储的，它在内存的存储是分散的，无论是添加还是删除较数组的最大优势就是都不需要整体动，只需要上一个元素的指向调整就好，缺点就是无法直接通过计算获得某个元素，如果要在链表中查找某一个元素，就需要遍历整个链表（最差情况）<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><blockquote>
-<p>遍历所有元素，挑出最小的元素放在结果集中并删除该元素，直到要排序的数据集中没有元素为止。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="golang版本"><a href="#golang版本" class="headerlink" title="golang版本"></a>golang版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	info := []int&#123;12, 3, 54, 6, 6777, 2342, 234, 55, 6, 6777, 34545,&#125;</span><br><span class="line"></span><br><span class="line">	for i := 0; i &lt; len(info); i++ &#123;</span><br><span class="line"></span><br><span class="line">		for j := 0; j &lt; len(info); j++ &#123;</span><br><span class="line">			if info[j] &lt; info[i] &#123;</span><br><span class="line">				info[i],info[j] = info[j],info[i]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(info)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="php版本"><a href="#php版本" class="headerlink" title="php版本"></a>php版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$arr_info = array(</span><br><span class="line">    10, 5, 12, 5, 67, 8, 45, 3, 11, 66, 442, 2, 34, 2342</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$result = array();</span><br><span class="line"></span><br><span class="line">$find_arr = $arr_info;</span><br><span class="line"></span><br><span class="line">for ($i = 0; $i &lt; sizeof($arr_info); $i++) &#123;</span><br><span class="line">    $tmp = 0;</span><br><span class="line">    $smallest = $find_arr[0];</span><br><span class="line">    for ($j = 0; $j &lt; sizeof($find_arr); $j++) &#123;</span><br><span class="line">        if ($smallest &gt; $find_arr[$j]) &#123;</span><br><span class="line">            $smallest = $find_arr[$j];</span><br><span class="line">            $tmp = $j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $result[] = $smallest;</span><br><span class="line">    unset($find_arr[$tmp]);</span><br><span class="line">    $find_arr = array_values($find_arr);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_export($result);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意，提取函数时小心删除元素之后，原数组长度受影响，这里使用find_arr设置为不断缩小的结果集。</p>
-</blockquote>
-
-                
-<p class="pink-link-context">
-    <a href="/yukk001.github.io/2019/02/19/算法图解-广度优先搜索/" rel="next" title="算法图解-广度优先搜索">
-    上一篇：算法图解-广度优先搜索
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/yukk001.github.io/2019/02/19/算法图解阅读笔记-递归与快速排序算法/" rel="next" title="算法图解阅读笔记-递归与快速排序算法">
-    下一篇：算法图解阅读笔记-递归与快速排序算法
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
 
 
 </div>
