@@ -7,7 +7,7 @@
 
     
 
-    <title>第二章-程序结构 | 于照熙</title>
+    <title>学习总结 | 于照熙</title>
     <meta name="author" content="zhaoxiyu">
     
     <meta name="description" content="照熙的自留地">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="第二章-程序结构">
+    
     <meta property="og:site_name" content="zhaoxiblog">
 
     
@@ -265,128 +265,30 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper blue">
-        <span class="breadcrumb">当前位置（分类目录）</span>
-        
-            
-    
-    
-    <a class="breadcrumb" href="/yukk001.github.io/categories/提升/">提升</a><a class="breadcrumb" href="/yukk001.github.io/categories/提升/读书/">读书</a><a class="breadcrumb" href="/yukk001.github.io/categories/提升/语言/">语言</a>
-
-
+        <span class="breadcrumb">当前位置（标签）</span>
         
 
+        
+            <a class="breadcrumb" href="/tags/学习总结/">学习总结</a>
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>第二章-程序结构</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2019-02-19T14:21:37.000Z"><a href="/yukk001.github.io/2019/02/19/第二章-程序结构/">2019-02-19</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <div class="collection mt-0">
         
-            <a href="/yukk001.github.io/tags/golang/" class="chip pink lighten-1">golang</a>
+            <a href="/yukk001.github.io/2019/04/02/常见排序算法总结/" class="collection-item grey-text text-darken-1">
+                <time datetime="2019-04-02T00:00:00.000Z">2019-04-02</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                插入排序
+            </a>
         
     </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#基础知识结构"><span class="section table-of-contents-text">基础知识结构</span></a></li></ol>
-</div>
-
-
-            <div class="entry pink-link-context">
-                <h2 id="基础知识结构"><a href="#基础知识结构" class="headerlink" title="基础知识结构"></a>基础知识结构</h2><ul>
-<li>命名 </li>
-<li>声明</li>
-<li>变量</li>
-<li>赋值</li>
-<li>类型</li>
-<li>包和文件 </li>
-<li>作用域</li>
-</ul>
-<hr>
-<p>####命名<br>命名规则：一个名字必须以一个字母（unicode字母）或者下划线开头，后面可以跟任意数量的字母数字或者下划线。区分大小写。<br>go的25个关键字如下：</p>
-<blockquote>
-<p>break ; default; func ; interface ;select ;  case ;  defer ;  go  ; map ; struct ; chan; else ; goto ; package ;switch ; const ; fallthrough ; if ; range ; type ; continue ; for ; import ; return ; var ;</p>
-</blockquote>
-<hr>
-<p>内建常量与内建函数如下</p>
-<blockquote>
-<p>常量：true ;  false  ;    iota  ; nil<br>内建类型  ：    int   ;   int8   ; int16  int32    int 64<br>        uint uint8  uint16  uint32  uint64  uintptr<br>        float32 float64 complex128  complex64<br>        bool type rune string  error<br>内建函数 ： make  len  cap  new  append   copy  close  delete<br>                     complex real imag </p>
-</blockquote>
-<pre><code>panic recover 
-</code></pre><hr>
-<p>golang  推荐驼峰式命名  同时默认规定 首字母大写的变量可以包外引用，首字母小些的变量 只能包内调用  （汉字变量目前为止首字母被认定为小写）</p>
-<hr>
-<p>####声明<br>声明语句定义了程序的各种实体对象以及部分或全部的属性。 golang 中只要有四种类型的声明语句 ： var const type func 分别对应 变量声明，常量声明，类型声明和函数声明。    </p>
-<hr>
-<p>声明一个量之后如果直接调用默认会返回改变量类型的零值。</p>
-<p>####变量</p>
-<ul>
-<li>new函数，使用new（T）函数会创建一个类型为T的零值变量，并返回其物理地址；</li>
-</ul>
-<hr>
-<ul>
-<li><p>变量的生命周期<br>变量的生命周期指的是在程序运行期间变量有效存在的时间间隔。 对于在包一级声明的变量来说，它们的生命周期和整个程序的运行周期一致。而相对的，在局部变量的生命周期是动态的： <strong>从每次创建一个新变量的生命语句开始，直到该变量不再被引用为止，然后变量的存储空间可能被回收</strong></p>
-</li>
-<li><p>go的垃圾回收机制基础理解（实现思路）：<br><strong>从每个包级的变量和每个当前运行函数的每一个局部变量开始，通过指针或者应用的访问路径遍历，是否可以找到该变量。如果不存在这样的访问路径。那么说明该变量是不可达的，也就是说它是否存在不会影响程序的后续运算结果。（该结果的选择不是由VAR或者new声明方式决定的。）</strong></p>
-</li>
-</ul>
-<hr>
-<p>####赋值<br>普通的赋值 略</p>
-<hr>
-<p>元组赋值<br>允许更新多个变量，这里之所以把元组赋值单独提出来，是因为golang有基础错误与成功与否的判断机制，就是单函数拥有多个返回值用于判断是否有错误与是否成功例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f,err = os.Open(&quot;fileName&quot;)</span><br><span class="line">v.ok = x.(T)</span><br><span class="line">_,ok = m[key]//判断map中是否有这个值</span><br><span class="line">//等等</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>####类型<br>golang允许自定义类型 所以两个变量判断相当的条件为值相同同时类型也相同；类型和类型之间存在转换，转换后的值比较更具操作性；</p>
-<p>####包和函数<br>主要注意事项为 引入顺序是有编译器的顺序决定的，并不是由导入顺序决定的。</p>
-<p>####作用域</p>
-<p>一个程序可以包含多个同名的声明只要作用域不相同是可以正常编译运行的，不过因为这样会导致代码理解出现误差。<br>作用域的主要理解如果按照书上所说是好大一段，个人理解为，大部分作用域的范围为其生命的代码块，除了逃逸变量与包可导出变量，这些变量的作用域可以扩大到他们的引入代码块。另外操作块的声明变量只生存于子操作块，这里主要是指 if for  switch块。</p>
-
-                
-<p class="pink-link-context">
-    <a href="/yukk001.github.io/2019/02/19/awk命令与示例/" rel="next" title="awk命令与示例">
-    上一篇：awk命令与示例
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/yukk001.github.io/2019/02/19/第五章-函数/" rel="next" title="第五章-函数">
-    下一篇：第五章-函数
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
 
 
 </div>
